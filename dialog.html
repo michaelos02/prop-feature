@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+  <script>
+ 
+  function openDialog(){
+     google.script.run.showPicker();
+  }
+  
+  function getProperties(){
+    google.script.run
+      .withSuccessHandler(fillBox)
+      .withFailureHandler(showError)
+      .getProperty("name");
+  }
+  function fillBox(theText){
+    document.getElementById('fileName').value = theText;
+  }
+  
+  function showError(err){
+    console.log(err);
+    window.alert("An error has occured: " & err);
+  }
+  
+  </script>
+</head>
+<body onload = "getProperties()">
+  <div>
+     <button onclick='openDialog()'>Open Dialog</button>
+     <input type="text" id="fileName"><br>
+     <p id='result'></p>
+  </div>
+  <script src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
+</body>
+</html>
